@@ -1,7 +1,7 @@
 get '/' do
   logged_in?
   
-  @contacts = []
+  @contacts = Contact.order('last_name')
   erb :index
 end
 

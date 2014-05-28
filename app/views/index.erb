@@ -15,22 +15,11 @@
   </thead>
   <tbody>
     <% @contacts.each do |contact| %>
-      <tr><a href="/contacts/<%=contact.id%>"><%=contact.id %></a></tr>
-      <tr><%=contact.first_name %></tr>
-      <tr><%=contact.last_name %></tr>
-      <tr><%=contact.phone %></tr>
-      <tr><%=contact.email %></tr>
-      <tr>
-	<a href="contacts/<%=contact.id%>/edit">Edit</a>
-	<form action="/contacts/<%=contact.id%>/delete" method="post">
-	  <input type="submit" value="delete">
-	</form>
-      </tr>
+      <%= erb :_contact_row, layout: false, locals: { contact: contact }  %>
     <% end %>
   </tbody>
-  <a href='/contacts/new'>add contact</a>
 </table>
-
+<a href='/contacts/new'>add contact</a>
 
 
 
