@@ -1,6 +1,7 @@
 get '/' do
   logged_in?
   
+  @contacts = []
   erb :index
 end
 
