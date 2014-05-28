@@ -1,6 +1,6 @@
 
 get '/contacts/new' do
-  erb :'contacts/new'
+  erb :'contacts/new', layout: !request.xhr?
 end
 
 get '/contacts/:id' do
@@ -10,11 +10,9 @@ end
 
 get '/contacts/:id/edit' do
   @contact = Contact.find(params[:id])
-  
+
   erb :'contacts/edit'
 end
-
-
 
 
 #POSTS--------------------------------------------:
@@ -22,7 +20,11 @@ post '/contacts' do
   @new = Contact.new(params[:contact])
 
   if @new.save
-    redirect '/'
+    if request.xhr?
+      erb :_contact_row, layout: false, locals: { contact: @new }
+    else
+      redirect "/contacts/#{@new.id}"
+    end
   else
     erb :'/contacts/new'
   end
